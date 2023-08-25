@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+    tier: frontend
+
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+        enironment: dev
+        tier: frontend
+    spec:
+        containers:
+        - name: web-server
+          image: nginx
+
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 80
+      port: 80
+      nodePort: 30001
+  selector:
+    app: nginx    
+
+
+
+
+
+
+
+
