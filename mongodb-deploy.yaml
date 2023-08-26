@@ -27,7 +27,7 @@ spec:
             secretKeyRef:
               name: mongodb-secret
               key: mongo-root-password
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: mongodb
