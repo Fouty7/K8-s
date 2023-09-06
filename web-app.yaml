@@ -28,12 +28,12 @@ spec:
             secretKeyRef:
               name: mongodb-secret
               key: mongo-root-password
-        - name: ME_CONFIG_MONGODB_SERVER
+        - name: ME_CONFIG_MONGODB_URL
           valueFrom:
             configMapKeyRef:
               name: mongodb-configmap
-              key: database_host   
-  replicas: 1
+              key: database_url
+  replicas: 3
   selector:
     matchLabels:
       app: mongo-express
@@ -44,7 +44,6 @@ kind: Service
 metadata:
   name: mongo-express
 spec:
-  type: ClusterIP
   ports:
   - targetPort: 8081
     port: 8081
